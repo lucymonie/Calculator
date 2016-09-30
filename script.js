@@ -19,8 +19,24 @@ var eight = document.getElementById('eight');
 var nine = document.getElementById('nine');
 var zero = document.getElementById('zero');
 
+clearAll.addEventListener('click', function(){
+  display.innerHTML = '0';
+  mathObj.first = null;
+  mathObj.second = null;
+  mathObj.op1 = null;
+  mathObj.op2 = null;
+  mathObj.temp = null;
+  mathObj.numString = '';
+});
+
+clearEntry.addEventListener('click', function(){
+  display.innerHTML = '0';
+  mathObj.numString = '';
+  mathObj.second = null;
+});
+
 var mathObj = {
-  temp: 1,
+  temp: null,
   numString: '',
   first: null,
   second: null,
@@ -28,9 +44,8 @@ var mathObj = {
   op2: null
 }
 
-function addition(first, second) {
-  console.log(mathObj.first + mathObj.second);
-   return first + second;
+function addition() {
+   mathObj.temp = mathObj.first + mathObj.second;
 };
 
 function subtraction() {
@@ -52,15 +67,13 @@ function evalNum() {
   } else if(mathObj.first !== null && mathObj.second === null) {
     mathObj.second = Math.abs(mathObj.numString);
     display.innerHTML = mathObj.second;
-  } else if(mathObj.first !== null && mathObj.second !== null) {
-    callOperator();
   }
   mathObj.numString = '';
 }
 
 function callOperator() {
   if(mathObj.op1 === 'addition') {
-      mathObj.temp = addition(mathObj.first, mathObj.second);      
+      addition();      
     } else if(mathObj.op1 === 'subtraction') {
       subtraction();      
     } else if(mathObj.op1 === 'division') {
@@ -77,41 +90,49 @@ function callOperator() {
 
 equals.addEventListener('click', function(e) {
   evalNum();
+  if(mathObj.op1===null) { 
+    mathObj.op1 = 'equals'; 
+  } else { 
+    mathObj.op2 = 'equals';
+  }
   callOperator();
-  console.log(mathObj);
-  mathObj.temp = null;
-  numString: '';
-  mathObj.first = null;
-  mathObj.second = null;
-  mathObj.op1 = null;
-  mathObj.op2 = null;
 });
 
 divide.addEventListener('click', function(e) {
+  evalNum();
   if(mathObj.op1===null) { 
     mathObj.op1 = 'division'; 
   } else { 
     mathObj.op2 = 'division'; 
+    callOperator();
   }
-  evalNum();
 });
 
 times.addEventListener('click', function(e) {
-  if(mathObj.op1===null) { mathObj.op1 = 'multiplication'; } 
-  else { mathObj.op2 = 'multiplication'; }
   evalNum();
+  if(mathObj.op1===null) { mathObj.op1 = 'multiplication'; } 
+  else { 
+    mathObj.op2 = 'multiplication';
+    callOperator();
+  }
 });
 
 plus.addEventListener('click', function(e) {
-  if(mathObj.op1===null) { mathObj.op1 = 'addition'; } 
-  else { mathObj.op2 = 'addition'; }
   evalNum();
+  if(mathObj.op1===null) { mathObj.op1 = 'addition'; } 
+  else { 
+    mathObj.op2 = 'addition';
+    callOperator(); 
+  }
 });
 
 minus.addEventListener('click', function(e) {
-  if(mathObj.op1===null) { mathObj.op1 = 'subtraction'; }
-  else { mathObj.op2 = 'subtraction'; }
   evalNum();
+  if(mathObj.op1===null) { mathObj.op1 = 'subtraction'; }
+  else { 
+    mathObj.op2 = 'subtraction';
+    callOperator();
+  }
 });
 
 point.addEventListener('click', function(e) {

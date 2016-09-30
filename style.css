@@ -46,35 +46,54 @@ hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin:
 
 input, select { vertical-align: middle; }
 /* End of Cross Browser Compatability CSS */
+body {
+  background-color: gray;
+}
+
 #space {
   width: 100%;
   height: 100px;
 }
 
+#button-box {
+  margin-left: 10px;
+}
+
 #calc {
-  width: 300px;
+  width: 170px;
+  height: 220px;
   margin: 0 auto;
   color: #666;
   font-family: 'Open Sans', sans-serif;
   font-size: 24px;
-  font-weight: bold;
+  border: 5px white solid;
+  border-radius: 10px;
 }
 
 button {
-  border: 1px solid #666;
+  background:none;
   background-color: white;
+  border-radius: 8px;
+  box-shadow: none;
   color: #666;
-  border-radius: 5px;
   height: 25px;
   width: 33px;
   height: 25px;
+  border:none;
+  font-size:0.6em;
+}
+
+button:focus {
+  outline:0;
 }
 
 #screen {
+  margin-left: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 8px;
   width:145px;
   height:28px;
-  border: 1px #666 solid;
-  border-radius: 5px;
   color: #666;
   text-align: right;
   font-size: 18px;
@@ -83,11 +102,11 @@ button {
 }
 
 #zero {
-  width: 70px;
+  width: 72px;
 }
 
 #equals {
-  height: 58px;
+  height: 59px;
   margin-top: 9px;
   margin-left: -1px;
 }
